@@ -1,12 +1,13 @@
 import { Controller, Get } from '@nestjs/common';
-import { AppService } from './app.service';
+import { MessageService } from './messages/message.service';
+import { Messages } from './messages/messages.model';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private readonly mesService: MessageService) { }
 
   @Get()
-  getAllReportMessages(): number[] {
-    return this.appService.getHello();
+  getAllReportMessages(): Promise<Messages[]> {
+    return this.mesService.findAll();
   }
 }
